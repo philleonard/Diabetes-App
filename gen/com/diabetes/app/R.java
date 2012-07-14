@@ -24,8 +24,9 @@ public final class R {
         public static final int goButton=0x7f050003;
         public static final int injectionSelector=0x7f050006;
         public static final int insulinDoseEditText=0x7f050002;
-        public static final int itemList=0x7f05000a;
+        public static final int itemList=0x7f05000b;
         public static final int textView1=0x7f050005;
+        public static final int textView2=0x7f05000a;
     }
     public static final class layout {
         public static final int data_entry=0x7f030000;
