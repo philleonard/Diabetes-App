@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".DataEntryForm"></activity>
+		<activity android:name=".FeelingRater"></activity>
     </application>
 
 </manifest>

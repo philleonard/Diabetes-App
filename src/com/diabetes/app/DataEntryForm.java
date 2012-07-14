@@ -1,9 +1,13 @@
 package com.diabetes.app;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
+import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -16,8 +20,9 @@ public class DataEntryForm extends Activity {
 	private EditText bloodSugarText, insulinDoseText, carbContentText;
 	private TextView errorBox;
 	private boolean done1 = true;
-	private boolean done2 = true;
 	private boolean done3 = true;
+	private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	private Date date = new Date();
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,8 +63,9 @@ public class DataEntryForm extends Activity {
 	    		}
 				
 				if (done1 && done3) {
-					Intent returnDataIntent = new Intent();
-					setResult(RESULT_OK, returnDataIntent);
+					String dateStamp = dateFormat.format(date);
+					Log.i("DATE", dateStamp);
+					//Write result to a text or data file, including dateStamp. If exception for empty thisCarbContent then ignore.
 					finish();
 				}
 				

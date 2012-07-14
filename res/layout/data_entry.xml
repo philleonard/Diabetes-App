@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:orientation="vertical" >
 
     <EditText
@@ -12,7 +13,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:hint="@string/bloodSugarString"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"
+         android:lines="1"/>
 
     <EditText
         android:id="@+id/carbContentEditText"
@@ -22,7 +24,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/insulinDoseEditText"
         android:hint="@string/carbString"
-        android:inputType="number" />
+        android:inputType="numberDecimal" android:lines="1"/>
 
     <EditText
         android:id="@+id/insulinDoseEditText"
@@ -32,7 +34,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/bloodSugarEditText"
         android:hint="@string/insulinDoseString"
-        android:inputType="number" />
+        android:inputType="numberDecimal" android:lines="1"/>
 
     <Button
         android:id="@+id/goButton"

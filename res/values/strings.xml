@@ -2,7 +2,7 @@
 <resources>
 
     <string name="informationEntryString">Enter Injection Data</string>
-    <string name="app_name">Diabetes Application</string>
+    <string name="app_name">Diabetes Health Tracker</string>
 	<string name="bloodSugarString">Blood Sugar</string>
 	<string name="carbString">Carbohydrate Content</string>
 	<string name="insulinDoseString">Insulin Dose</string>
