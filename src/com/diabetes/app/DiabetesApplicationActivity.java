@@ -9,11 +9,15 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.diabetes.app.R;
@@ -26,15 +30,13 @@ public class DiabetesApplicationActivity extends Activity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startActivity(new Intent(getApplicationContext(), SplashScreen.class));
-
-        setContentView(R.layout.main);
         
-		SdAvail sd = new SdAvail();
-		storageFound = sd.check();
-		injectionDataMade = sd.injectionDataCheck();
-		
-		if (!storageFound || !injectionDataMade) {
+  
+        startActivity(new Intent(getApplicationContext(), SplashScreen.class));
+        setContentView(R.layout.main);
+      
+        SdAvail sd = new SdAvail();
+		if (!sd.check() || !sd.injectionDataCheck()) {
 			Toast.makeText(this,"SD Card/ External Storage not found. App needs external stroage to write data", Toast.LENGTH_LONG).show();
 		}
 		
@@ -71,6 +73,5 @@ public class DiabetesApplicationActivity extends Activity {
 				
 			}
         });
-    }
-   
+    }  
 }

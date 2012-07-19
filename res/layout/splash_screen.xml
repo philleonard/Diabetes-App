@@ -2,25 +2,32 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF" 
-    android:orientation="vertical">
+    android:background="#FFFFFF"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/diabeteslogoimage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/logo"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="133dp"
         android:src="@drawable/diabetesbluecircle" />
 
     <TextView
         android:id="@+id/appNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/diabeteslogoimage"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="155dp"
+        android:layout_marginTop="16dp"
         android:text="Diabetes Health Tracker App"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#8A8A8A" />

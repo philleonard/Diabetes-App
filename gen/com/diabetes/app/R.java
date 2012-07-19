@@ -10,6 +10,8 @@ package com.diabetes.app;
 public final class R {
     public static final class anim {
         public static final int fadein=0x7f040000;
+        public static final int fadeinsplash=0x7f040001;
+        public static final int fadeout=0x7f040002;
     }
     public static final class attr {
     }
@@ -22,11 +24,11 @@ public final class R {
         public static final int DailyInsulinRemaining=0x7f060010;
         public static final int ONInsulinRemaining=0x7f06000d;
         public static final int OvernightInsulinBar=0x7f06000b;
-        public static final int appNameText=0x7f060015;
+        public static final int appNameText=0x7f060016;
         public static final int bloodSugarEditText=0x7f060000;
         public static final int carbContentEditText=0x7f060001;
         public static final int dataEntryErrorBox=0x7f060004;
-        public static final int diabeteslogoimage=0x7f060014;
+        public static final int diabeteslogoimage=0x7f060015;
         public static final int feelingComment=0x7f060008;
         public static final int feelingRatingBar=0x7f060007;
         public static final int feelingSubmitButton=0x7f060009;
@@ -36,6 +38,7 @@ public final class R {
         public static final int insulinPenDay=0x7f06000c;
         public static final int insulinPenON=0x7f06000e;
         public static final int itemList=0x7f060013;
+        public static final int logo=0x7f060014;
         public static final int resetDay=0x7f060011;
         public static final int resetON=0x7f060012;
         public static final int textView1=0x7f060005;

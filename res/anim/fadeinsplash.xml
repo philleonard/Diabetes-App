@@ -3,5 +3,5 @@
         <alpha android:fromAlpha="0.0" 
             android:toAlpha="1.0" 
             android:interpolator="@android:anim/accelerate_interpolator" 
-            android:duration="700"/>
+            android:duration="1500"/>
 </set>
