@@ -22,9 +22,12 @@ public class DiabetesApplicationActivity extends Activity {
 	
 	private boolean storageFound;
 	private boolean injectionDataMade;
-    @Override
+    
+	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        startActivity(new Intent(getApplicationContext(), SplashScreen.class));
+
         setContentView(R.layout.main);
         
 		SdAvail sd = new SdAvail();
