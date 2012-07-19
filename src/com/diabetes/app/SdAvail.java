@@ -23,7 +23,7 @@ public class SdAvail {
 		
 	File sdcard = new File(Environment.getExternalStorageDirectory().toString());
 	if (sdcard.isDirectory()) {
-		File diabetes_folder = new File(sdcard + "/Diabetes_Health_Tracker_Data");
+		File diabetes_folder = new File(sdcard + "/.Diabetes_Health_Tracker_Data");
 		if (!diabetes_folder.isDirectory()) {
 			diabetes_folder.mkdir();
 		}

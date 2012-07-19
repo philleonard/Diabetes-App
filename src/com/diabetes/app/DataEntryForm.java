@@ -105,7 +105,7 @@ public class DataEntryForm extends Activity {
 		injectionDataPresent = sd.injectionDataCheck();
 		
 		if (sdCardPresent && injectionDataPresent) {		
-			File injectionData = new File(Environment.getExternalStorageDirectory().toString() + "/Diabetes_Health_Tracker_Data/injection_data.csv");
+			File injectionData = new File(Environment.getExternalStorageDirectory().toString() + "/.Diabetes_Health_Tracker_Data/injection_data.csv");
 			//Write to file now
 			try {
 				buf = new BufferedWriter(new FileWriter(injectionData, true));

@@ -2,9 +2,11 @@ package com.diabetes.app;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -42,6 +44,7 @@ public class FeelingRater extends Activity {
 	private boolean storageFound = true;
 	private boolean injectionDataMade = true;
 	private int lineCount = 0;
+	private File injectionDataFile = new File(Environment.getExternalStorageDirectory().toString()+"/.Diabetes_Health_Tracker_Data/injection_data.csv");
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -55,7 +58,6 @@ public class FeelingRater extends Activity {
 		injectionDataMade = sd.injectionDataCheck();
 		
 		if (storageFound && injectionDataMade) {
-			File injectionDataFile = new File(Environment.getExternalStorageDirectory().toString()+"/Diabetes_Health_Tracker_Data/injection_data.csv");
 
 			InputStream in = null;
 			try {
@@ -131,7 +133,11 @@ public class FeelingRater extends Activity {
 					submitButton = (Button) findViewById(R.id.feelingSubmitButton);
 					submitButton.setOnClickListener(new OnClickListener() {
 						public void onClick(View v) {
-							addToCsvFile();
+							try {
+								addToCsvFile();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
 							finish();
 							}
 					});
@@ -145,9 +151,31 @@ public class FeelingRater extends Activity {
 		
 	}
 	
-	private void addToCsvFile() {
+	private void addToCsvFile() throws IOException {
+		InputStream in3 = null;
+		try {
+			in3 = new BufferedInputStream(new FileInputStream(injectionDataFile));
+		} catch (FileNotFoundException e) {
+			Toast.makeText(this,"Cant find the file", Toast.LENGTH_LONG).show();
+			e.printStackTrace();
+		}
+		BufferedReader br3 = new BufferedReader(new InputStreamReader(in3));
+		
+		String spinnerSelection = injectionSpinner.getSelectedItem().toString();
+		
+		int readLineCount = 1;
+		while (!br3.readLine().contains(spinnerSelection)) {
+			readLineCount++;
+		}
+		
+		BufferedWriter bw = new BufferedWriter(new FileWriter(injectionDataFile));
+		
 		String feelingComment = feelingCommentText.getText().toString();
+		//Write loop to escape any commas in the String to avoid CSV (Comma Separated Values) confusion.
 		double feelingRating = feelingRatingBar.getRating();
+		String input = ", " + feelingRating + ", " + feelingComment;
+		
+		//Write input String to the file.
 	}
 }
 
