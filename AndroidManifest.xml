@@ -20,9 +20,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DataEntryForm" android:theme="@android:style/Theme.NoTitleBar"></activity>
-		<activity android:name=".FeelingRater" android:theme="@android:style/Theme.NoTitleBar"></activity>
-		<activity android:name=".SplashScreen" android:screenOrientation="portrait" android:theme="@android:style/Theme.NoTitleBar"></activity>
+        <activity android:name=".DataEntryForm"/>
+		<activity android:name=".FeelingRater"/>
+		<activity android:name=".DataEntryTab"/>
+		<activity android:name=".DataViewTab"/>
+		<activity android:name=".SettingsAndExtraTab"/>
+		<activity android:name=".SplashScreen" android:screenOrientation="portrait"/>
     </application>
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
