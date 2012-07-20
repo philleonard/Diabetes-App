@@ -4,4 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+        <Button
+        android:id="@+id/dataViewButton"
+        android:layout_width="172dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="View Data" />
+        
 </RelativeLayout>
