@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".DataEntryForm"/>
+        <activity android:name=".ViewData"/>
 		<activity android:name=".FeelingRater"/>
 		<activity android:name=".DataEntryTab"/>
 		<activity android:name=".DataViewTab"/>
