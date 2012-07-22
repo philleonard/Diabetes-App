@@ -46,6 +46,7 @@ public final class R {
         public static final int resetON=0x7f060016;
         public static final int textView1=0x7f060009;
         public static final int textView2=0x7f06000e;
+        public static final int viewDataTable=0x7f06001a;
     }
     public static final class layout {
         public static final int data_entry=0x7f030000;
