@@ -105,7 +105,7 @@ public class DataEntryForm extends Activity {
 		injectionDataPresent = sd.injectionDataCheck();
 		
 		if (sdCardPresent && injectionDataPresent) {		
-			File injectionData = new File(Environment.getExternalStorageDirectory().toString() + "/.Diabetes_Health_Tracker_Data/injection_data.csv");
+			File injectionData = new File(Environment.getExternalStorageDirectory().toString() + "/.Diabetes_Health_Tracker_Data/.injection_data.csv");
 			//Write to file now
 			try {
 				buf = new BufferedWriter(new FileWriter(injectionData, true));
@@ -117,7 +117,7 @@ public class DataEntryForm extends Activity {
 			}
 		}
 		else {
-			Toast.makeText(this,"SD Card/ External Storage not found. App needs external stroage to write data", Toast.LENGTH_LONG).show();
+			Toast.makeText(this,"External Storage not found. Unable to write data", Toast.LENGTH_LONG).show();
 			finish();
 		}
 		

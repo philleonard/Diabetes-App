@@ -27,7 +27,7 @@ public class SdAvail {
 		if (!diabetes_folder.isDirectory()) {
 			diabetes_folder.mkdir();
 		}
-		File injectionData = new File(diabetes_folder + "/injection_data.csv");
+		File injectionData = new File(diabetes_folder + "/.injection_data.csv");
 		if (!injectionData.isFile()) {
 			try {
 				injectionData.createNewFile();

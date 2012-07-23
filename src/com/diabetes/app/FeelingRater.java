@@ -44,7 +44,7 @@ public class FeelingRater extends Activity {
 	private boolean storageFound = true;
 	private boolean injectionDataMade = true;
 	private int lineCount = 0;
-	private File injectionDataFile = new File(Environment.getExternalStorageDirectory().toString()+"/.Diabetes_Health_Tracker_Data/injection_data.csv");
+	private File injectionDataFile = new File(Environment.getExternalStorageDirectory().toString()+"/.Diabetes_Health_Tracker_Data/.injection_data.csv");
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -145,7 +145,7 @@ public class FeelingRater extends Activity {
 		}
 				
 		else {
-			Toast.makeText(this,"SD Card/ External Storage not found. App needs external stroage to write data", Toast.LENGTH_LONG).show();
+			Toast.makeText(this,"External Storage not found. Unable to write data", Toast.LENGTH_LONG).show();
 			finish();
 		}
 		
@@ -176,6 +176,8 @@ public class FeelingRater extends Activity {
 		String input = ", " + feelingRating + ", " + feelingComment;
 		
 		//Write input String to the file.
+		
+		
 	}
 }
 
