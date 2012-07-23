@@ -27,6 +27,7 @@
 		<activity android:name=".DataViewTab"/>
 		<activity android:name=".SettingsAndExtraTab"/>
 		<activity android:name=".SplashScreen" android:screenOrientation="portrait"/>
+		<activity  android:name=".InsulinLevels"></activity>
     </application>
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
