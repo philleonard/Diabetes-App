@@ -24,7 +24,7 @@ public class ViewData extends Activity {
 		setContentView(R.layout.view_data);
 		
 		//obtaining CSV file 'injection_data'
-		File Data = new File(Environment.getExternalStorageDirectory() + "/.Diabetes_Health_Tracker_Data/.injection_data.csv");
+		File Data = new File(Environment.getExternalStorageDirectory() + "/Diabetes_Health_Tracker_Data/injection_data.csv");
 		TableLayout DataTable = (TableLayout) findViewById(R.id.viewDataTable);
 		
 		TableRow TableHeadings = new TableRow(this);

@@ -23,11 +23,11 @@ public class SdAvail {
 		
 	File sdcard = new File(Environment.getExternalStorageDirectory().toString());
 	if (sdcard.isDirectory()) {
-		File diabetes_folder = new File(sdcard + "/.Diabetes_Health_Tracker_Data");
+		File diabetes_folder = new File(sdcard + "/Diabetes_Health_Tracker_Data");
 		if (!diabetes_folder.isDirectory()) {
 			diabetes_folder.mkdir();
 		}
-		File injectionData = new File(diabetes_folder + "/.injection_data.csv");
+		File injectionData = new File(diabetes_folder + "/injection_data.csv");
 		if (!injectionData.isFile()) {
 			try {
 				injectionData.createNewFile();

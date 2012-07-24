@@ -10,6 +10,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -44,7 +46,7 @@ public class FeelingRater extends Activity {
 	private boolean storageFound = true;
 	private boolean injectionDataMade = true;
 	private int lineCount = 0;
-	private File injectionDataFile = new File(Environment.getExternalStorageDirectory().toString()+"/.Diabetes_Health_Tracker_Data/.injection_data.csv");
+	private File injectionDataFile = new File(Environment.getExternalStorageDirectory().toString()+"/Diabetes_Health_Tracker_Data/injection_data.csv");
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -134,7 +136,7 @@ public class FeelingRater extends Activity {
 						public void onClick(View v) {
 							addToCsvFile();
 							finish();
-							}
+						}
 					});
 				}
 		}
@@ -154,42 +156,51 @@ public class FeelingRater extends Activity {
 			Toast.makeText(this,"Cant find the file", Toast.LENGTH_LONG).show();
 			e.printStackTrace();
 		}
+		
 		BufferedReader br3 = new BufferedReader(new InputStreamReader(in3));
 		
 		String spinnerSelection = injectionSpinner.getSelectedItem().toString();
+		File injectionDataFileTemp = new File(injectionDataFile.toString() + ".temp");
 		
-		
-		//File is being deleted after a single execution of the following code.
-		//Reminder to find out why, and to rectify the problem.
-		
-		//Most likely something to do with an unobserved exception with the buffered writer object instantiation 
-		//LogCat isn't working on laptop so I can't tell.
-		
-		int readLineCount = 1;
 		try {
-			while (!br3.readLine().contains(spinnerSelection)) {
-				readLineCount++;
+			injectionDataFileTemp.createNewFile();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+		BufferedWriter buf = null;
+		try {
+			buf = new BufferedWriter(new FileWriter(injectionDataFileTemp));
+		} catch (IOException e2) {
+			e2.printStackTrace();
+		}
+		
+		String currentLine;
+		int thisLineCount = 0;
+		try {
+			while ((currentLine = br3.readLine()) != null) {
+				thisLineCount++;
+				if (currentLine.contains(spinnerSelection)) {
+					//Append the altered line with rating to the .temp file
+					String feelingComment = feelingCommentText.getText().toString();
+					double feelingRating = feelingRatingBar.getRating();
+					String input = currentLine + ", " + feelingRating + ", " + feelingComment;
+					buf.append(input);
+				}
+				//Problem adding the data to the file
+				else {
+					//Append this current line to the .temp file
+					buf.append(currentLine);
+				}
+				buf.newLine();
+				buf.close();
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		try {
-			BufferedWriter bw = new BufferedWriter(FileWriter(injectionDataFile));
-		} catch (IOException e) {
-			System.out.print("Look here");
-			e.printStackTrace();
-		}
-		
-		String feelingComment = feelingCommentText.getText().toString();
-		//Write loop to escape any commas in the String to avoid CSV (Comma Separated Values) confusion.
-		double feelingRating = feelingRatingBar.getRating();
-		String input = ", " + feelingRating + ", " + feelingComment;
-		
-		//Write input String to the file.
-		
-		
+
+		injectionDataFile.delete();
+		injectionDataFileTemp.renameTo(injectionDataFile);
 	}
 }
 

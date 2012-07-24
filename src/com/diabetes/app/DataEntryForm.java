@@ -27,7 +27,7 @@ public class DataEntryForm extends Activity {
 	private TextView errorBox;
 	private boolean done1 = true;
 	private boolean done3 = true;
-	private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 	private Date date = new Date();
 	private String dateStamp;
 	private BufferedWriter buf;
@@ -36,6 +36,7 @@ public class DataEntryForm extends Activity {
 	private double thisInsulinDose;
 	private boolean sdCardPresent;
 	private boolean injectionDataPresent;
+	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.data_entry);
@@ -101,7 +102,7 @@ public class DataEntryForm extends Activity {
 		injectionDataPresent = sd.injectionDataCheck();
 		
 		if (sdCardPresent && injectionDataPresent) {		
-			File injectionData = new File(Environment.getExternalStorageDirectory().toString() + "/.Diabetes_Health_Tracker_Data/.injection_data.csv");
+			File injectionData = new File(Environment.getExternalStorageDirectory().toString() + "/Diabetes_Health_Tracker_Data/injection_data.csv");
 			//Write to file now
 			try {
 				buf = new BufferedWriter(new FileWriter(injectionData, true));
