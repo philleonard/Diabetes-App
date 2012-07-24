@@ -10,6 +10,8 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" 
         android:theme="@android:style/Theme.NoTitleBar">
+        
+        <!-- Main Activity -->
         <activity
             android:name=".DiabetesApplicationActivity"
             android:label="@string/app_name" 
@@ -20,15 +22,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <!-- Other Activities -->
         <activity android:name=".DataEntryForm"/>
         <activity android:name=".ViewData"/>
 		<activity android:name=".FeelingRater"/>
 		<activity android:name=".DataEntryTab"/>
 		<activity android:name=".DataViewTab"/>
 		<activity android:name=".SettingsAndExtraTab"/>
-		<activity android:name=".SplashScreen" android:screenOrientation="portrait"/>
-		<activity  android:name=".InsulinLevels"></activity>
+		<activity android:name=".SplashScreen"/>
+		<activity  android:name=".InsulinLevels"/>
+		
     </application>
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    
+    <!-- Permissions -->
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+	
 </manifest>

@@ -79,9 +79,8 @@ public class FeelingRater extends Activity {
 					}
 					
 					int maxLine = lineCount;
-					if (lineCount > 10) {
+					if (lineCount > 10)
 						lineCount = 10;
-					}
 					
 					if (lineCount == 0) {
 						Toast.makeText(this,"No injection data recorded yet", Toast.LENGTH_LONG).show();
@@ -133,11 +132,7 @@ public class FeelingRater extends Activity {
 					submitButton = (Button) findViewById(R.id.feelingSubmitButton);
 					submitButton.setOnClickListener(new OnClickListener() {
 						public void onClick(View v) {
-							try {
-								addToCsvFile();
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
+							addToCsvFile();
 							finish();
 							}
 					});
@@ -151,7 +146,7 @@ public class FeelingRater extends Activity {
 		
 	}
 	
-	private void addToCsvFile() throws IOException {
+	private void addToCsvFile() {
 		InputStream in3 = null;
 		try {
 			in3 = new BufferedInputStream(new FileInputStream(injectionDataFile));
@@ -163,12 +158,29 @@ public class FeelingRater extends Activity {
 		
 		String spinnerSelection = injectionSpinner.getSelectedItem().toString();
 		
+		
+		//File is being deleted after a single execution of the following code.
+		//Reminder to find out why, and to rectify the problem.
+		
+		//Most likely something to do with an unobserved exception with the buffered writer object instantiation 
+		//LogCat isn't working on laptop so I can't tell.
+		
 		int readLineCount = 1;
-		while (!br3.readLine().contains(spinnerSelection)) {
-			readLineCount++;
+		try {
+			while (!br3.readLine().contains(spinnerSelection)) {
+				readLineCount++;
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
-		BufferedWriter bw = new BufferedWriter(new FileWriter(injectionDataFile));
+		try {
+			BufferedWriter bw = new BufferedWriter(FileWriter(injectionDataFile));
+		} catch (IOException e) {
+			System.out.print("Look here");
+			e.printStackTrace();
+		}
 		
 		String feelingComment = feelingCommentText.getText().toString();
 		//Write loop to escape any commas in the String to avoid CSV (Comma Separated Values) confusion.

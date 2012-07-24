@@ -37,9 +37,8 @@ public class DiabetesApplicationActivity extends TabActivity {
         setContentView(R.layout.main);
       
         SdAvail sd = new SdAvail();
-		if (!sd.check() || !sd.injectionDataCheck()) {
+		if (!sd.check() || !sd.injectionDataCheck())
 			Toast.makeText(this,"External Storage not found. Unable to write data" , Toast.LENGTH_LONG).show();
-		}
 		
 		TabHost tabHost = getTabHost();
 		Resources resources = getResources(); 

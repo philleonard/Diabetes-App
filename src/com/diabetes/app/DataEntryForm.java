@@ -82,16 +82,12 @@ public class DataEntryForm extends Activity {
 					if (thisCarbContent == 0)
 						writeData = dateStamp + ", " + thisBloodSugar + ", n/a, " + thisInsulinDose; 
 					else
-						writeData = dateStamp + ", " + thisBloodSugar + ", " + thisCarbContent + ", " + thisInsulinDose; 	
-
-					if (writeDataToInjectionData(writeData)) {
-						finish();
-					}
-					else {
-						errorBox.setText("External storage device not found");
-					}
+						writeData = dateStamp + ", " + thisBloodSugar + ", " + thisCarbContent + ", " + thisInsulinDose; 
 					
-					//Write result to a text or data file, including dateStamp. If exception for empty thisCarbContent then ignore.
+					if (writeDataToInjectionData(writeData))
+						finish();
+					else
+						errorBox.setText("External storage device not found");
 				}
 				
 			}
