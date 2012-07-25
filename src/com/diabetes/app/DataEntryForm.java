@@ -77,7 +77,6 @@ public class DataEntryForm extends Activity {
 				
 				if (done1 && done3) {
 					dateStamp = dateFormat.format(date);
-					Log.i("DATE", dateStamp);
 					
 					String writeData;
 					if (thisCarbContent == 0)

@@ -22,32 +22,35 @@ public final class R {
     public static final class id {
         public static final int DailyInsulinBar=0x7f060013;
         public static final int DailyInsulinRemaining=0x7f060014;
+        public static final int LinearLayout1=0x7f060017;
         public static final int ONInsulinRemaining=0x7f060011;
         public static final int OvernightInsulinBar=0x7f06000f;
         public static final int RelativeLayout1=0x7f060005;
-        public static final int appNameText=0x7f06001a;
+        public static final int appNameText=0x7f06001d;
         public static final int bloodSugarEditText=0x7f060000;
         public static final int carbContentEditText=0x7f060001;
         public static final int dataEntryButton=0x7f060006;
         public static final int dataEntryErrorBox=0x7f060004;
         public static final int dataViewButton=0x7f060008;
-        public static final int diabeteslogoimage=0x7f060018;
+        public static final int diabeteslogoimage=0x7f06001b;
         public static final int feelingComment=0x7f06000c;
         public static final int feelingRatingBar=0x7f06000b;
         public static final int feelingSubmitButton=0x7f06000d;
         public static final int goButton=0x7f060003;
         public static final int injectionSelector=0x7f06000a;
         public static final int insulinDoseEditText=0x7f060002;
-        public static final int insulinLevelsButton=0x7f060017;
+        public static final int insulinLevelsButton=0x7f06001a;
         public static final int insulinPenDay=0x7f060010;
         public static final int insulinPenON=0x7f060012;
-        public static final int logo=0x7f060019;
+        public static final int logo=0x7f06001c;
+        public static final int noRatingSelection=0x7f060019;
         public static final int ratingButton=0x7f060007;
         public static final int resetDay=0x7f060015;
         public static final int resetON=0x7f060016;
         public static final int textView1=0x7f060009;
         public static final int textView2=0x7f06000e;
-        public static final int viewDataTable=0x7f06001b;
+        public static final int viewDataTable=0x7f06001e;
+        public static final int yesRatingSelection=0x7f060018;
     }
     public static final class layout {
         public static final int data_entry=0x7f030000;
@@ -56,9 +59,10 @@ public final class R {
         public static final int feeling_rater=0x7f030003;
         public static final int insulin_meter=0x7f030004;
         public static final int main=0x7f030005;
-        public static final int settings_tab=0x7f030006;
-        public static final int splash_screen=0x7f030007;
-        public static final int view_data=0x7f030008;
+        public static final int rating_overwrite_popup=0x7f030006;
+        public static final int settings_tab=0x7f030007;
+        public static final int splash_screen=0x7f030008;
+        public static final int view_data=0x7f030009;
     }
     public static final class string {
         public static final int app_name=0x7f050001;

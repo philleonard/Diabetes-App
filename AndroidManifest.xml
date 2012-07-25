@@ -31,8 +31,8 @@
 		<activity android:name=".DataViewTab"/>
 		<activity android:name=".SettingsAndExtraTab"/>
 		<activity android:name=".SplashScreen"/>
-		<activity  android:name=".InsulinLevels"/>
-		
+		<activity android:name=".InsulinLevels"/>
+		<activity android:name=".OverwriteConformation"/>
     </application>
     
     <!-- Permissions -->

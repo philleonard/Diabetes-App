@@ -176,34 +176,63 @@ public class FeelingRater extends Activity {
 		}
 		
 		String currentLine;
-		int thisLineCount = 0;
 		try {
 			while ((currentLine = br3.readLine()) != null) {
-				thisLineCount++;
 				if (currentLine.contains(spinnerSelection)) {
-					//Append the altered line with rating to the .temp file
-					String feelingComment = feelingCommentText.getText().toString();
-					double feelingRating = feelingRatingBar.getRating();
-					String input = currentLine + ", " + feelingRating + ", " + feelingComment;
-					buf.append(input);
+					boolean yes = true;
+					int commaCount = 0;
+					
+					String[] currentLineSplit = currentLine.split("");
+					for (int z = 0; z < currentLineSplit.length; z++) {
+						if (currentLineSplit[z].equals(",")) {
+							commaCount++;
+						}
+					}
+
+					if (commaCount > 3)
+						startActivity(new Intent(getApplicationContext(), OverwriteConformation.class));
+										
+					if (yes) {
+						double feelingRating = feelingRatingBar.getRating();
+						String feelingComment = feelingCommentText.getText().toString();
+						feelingComment = escapeCommas(feelingComment);						
+						String input = currentLine + ", " + feelingRating + ", " + feelingComment;
+						buf.append(input);
+					}
+					else 
+						buf.append(currentLine);
 				}
-				//Problem adding the data to the file
-				else {
-					//Append this current line to the .temp file
+				else
 					buf.append(currentLine);
-				}
+				
+				buf.flush();
 				buf.newLine();
-				buf.close();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		try {
+			buf.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		injectionDataFile.delete();
 		injectionDataFileTemp.renameTo(injectionDataFile);
 	}
-}
 
+	private String escapeCommas(String feelingComment) {
+		String[] feelingCommentSplit = feelingComment.split("");
+		feelingComment = null;
+		for (int x = 0; x < feelingCommentSplit.length; x++) {
+			if (feelingCommentSplit[x].contains(",")) {
+				feelingCommentSplit[x] = ""; //Find out how to escape commas in a String
+			}
+			feelingComment = feelingComment + feelingCommentSplit[x];
+		}
+		return feelingComment;
+	}
+}
 
 
 

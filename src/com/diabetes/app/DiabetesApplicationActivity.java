@@ -41,7 +41,6 @@ public class DiabetesApplicationActivity extends TabActivity {
 			Toast.makeText(this,"External Storage not found. Unable to write data" , Toast.LENGTH_LONG).show();
 		
 		TabHost tabHost = getTabHost();
-		Resources resources = getResources(); 
 		
 		Intent dataEntryIntent = new Intent().setClass(this, DataEntryTab.class);
 		TabSpec dataEntryTab = tabHost.newTabSpec("Data Entry").setIndicator("Data Entry").setContent(dataEntryIntent);		  
