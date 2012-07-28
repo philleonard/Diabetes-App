@@ -125,7 +125,6 @@ public class FeelingRater extends Activity {
 				    injectionSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 						public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 							String feelingTimeStamp = spinnerItems[pos];
-							Log.i("Spin", feelingTimeStamp);
 						}
 			
 						public void onNothingSelected(AdapterView<?> arg0) {}
@@ -189,17 +188,30 @@ public class FeelingRater extends Activity {
 						}
 					}
 
-					if (commaCount > 3)
+					if (commaCount > 3) {
 						startActivity(new Intent(getApplicationContext(), OverwriteConformation.class));
+						//Change yes = no if no selected from OverwriteConformation.class
+					}
 										
 					if (yes) {
 						double feelingRating = feelingRatingBar.getRating();
 						String feelingComment = feelingCommentText.getText().toString();
-						feelingComment = escapeCommas(feelingComment);						
+						feelingComment = escapeCommas(feelingComment);
+						if (commaCount > 3) {
+							currentLine = "";
+							int commaRemoveCounter = 0;
+							for (int y = 0; y < currentLineSplit.length; y++) {
+								if (currentLineSplit[y].contains(","))
+									commaRemoveCounter++;
+								if (commaRemoveCounter > 3) 
+									break;
+								currentLine = currentLine + currentLineSplit[y];
+							}
+						}
 						String input = currentLine + ", " + feelingRating + ", " + feelingComment;
 						buf.append(input);
 					}
-					else 
+					else if (!yes)
 						buf.append(currentLine);
 				}
 				else
@@ -223,7 +235,7 @@ public class FeelingRater extends Activity {
 
 	private String escapeCommas(String feelingComment) {
 		String[] feelingCommentSplit = feelingComment.split("");
-		feelingComment = null;
+		feelingComment = "";
 		for (int x = 0; x < feelingCommentSplit.length; x++) {
 			if (feelingCommentSplit[x].contains(",")) {
 				feelingCommentSplit[x] = ""; //Find out how to escape commas in a String
