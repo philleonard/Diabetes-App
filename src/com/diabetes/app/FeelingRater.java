@@ -45,8 +45,11 @@ public class FeelingRater extends Activity {
 	private TextView rateErrorBox;
 	private boolean storageFound = true;
 	private boolean injectionDataMade = true;
+	private boolean yes = true;
 	private int lineCount = 0;
 	private File injectionDataFile = new File(Environment.getExternalStorageDirectory().toString()+"/Diabetes_Health_Tracker_Data/injection_data.csv");
+	private File injectionDataFileTemp = new File(injectionDataFile.toString() + ".temp");
+	private boolean waiting = false;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -127,14 +130,17 @@ public class FeelingRater extends Activity {
 							String feelingTimeStamp = spinnerItems[pos];
 						}
 			
-						public void onNothingSelected(AdapterView<?> arg0) {}
+						public void onNothingSelected(AdapterView<?> arg0) {
+							Toast.makeText(getApplicationContext(),"finished", Toast.LENGTH_LONG).show();
+						}
 				    });
 					
 					submitButton = (Button) findViewById(R.id.feelingSubmitButton);
 					submitButton.setOnClickListener(new OnClickListener() {
 						public void onClick(View v) {
-							addToCsvFile();
-							finish();
+							if (!addToCsvFile()) {
+								finish();
+							}
 						}
 					});
 				}
@@ -147,7 +153,7 @@ public class FeelingRater extends Activity {
 		
 	}
 	
-	private void addToCsvFile() {
+	private boolean addToCsvFile() {
 		InputStream in3 = null;
 		try {
 			in3 = new BufferedInputStream(new FileInputStream(injectionDataFile));
@@ -159,7 +165,6 @@ public class FeelingRater extends Activity {
 		BufferedReader br3 = new BufferedReader(new InputStreamReader(in3));
 		
 		String spinnerSelection = injectionSpinner.getSelectedItem().toString();
-		File injectionDataFileTemp = new File(injectionDataFile.toString() + ".temp");
 		
 		try {
 			injectionDataFileTemp.createNewFile();
@@ -167,70 +172,74 @@ public class FeelingRater extends Activity {
 			e1.printStackTrace();
 		}
 		
-		BufferedWriter buf = null;
+		boolean done = false;
+		String thisCurrentLine;
 		try {
-			buf = new BufferedWriter(new FileWriter(injectionDataFileTemp));
-		} catch (IOException e2) {
-			e2.printStackTrace();
-		}
-		
-		String currentLine;
-		try {
-			while ((currentLine = br3.readLine()) != null) {
-				if (currentLine.contains(spinnerSelection)) {
-					boolean yes = true;
-					int commaCount = 0;
+			while ((thisCurrentLine = br3.readLine()) != null) {
+				if (thisCurrentLine.contains(spinnerSelection)) {
+					int thisCommaCount = 0;
+					String[] thisCurrentLineSplit = thisCurrentLine.split("");
+					for (int u = 0; u < thisCurrentLineSplit.length; u++) {
+						if (thisCurrentLineSplit[u].equals(",")) {
+							thisCommaCount++;
+						}
+					}
 					
-					String[] currentLineSplit = currentLine.split("");
-					for (int z = 0; z < currentLineSplit.length; z++) {
-						if (currentLineSplit[z].equals(",")) {
-							commaCount++;
-						}
+					if (thisCommaCount > 3) {
+						done = true;
+						waiting = true;
+						startActivityForResult(new Intent(getApplicationContext(), OverwriteConformation.class), 0);
+						Log.w("Diabetes Debug", "The activity ends now!");
+						//Feeling Rater activity ending while OverwriteConformation still running.
 					}
-
-					if (commaCount > 3) {
-						startActivity(new Intent(getApplicationContext(), OverwriteConformation.class));
-						//Change yes = no if no selected from OverwriteConformation.class
-					}
-										
-					if (yes) {
-						double feelingRating = feelingRatingBar.getRating();
-						String feelingComment = feelingCommentText.getText().toString();
-						feelingComment = escapeCommas(feelingComment);
-						if (commaCount > 3) {
-							currentLine = "";
-							int commaRemoveCounter = 0;
-							for (int y = 0; y < currentLineSplit.length; y++) {
-								if (currentLineSplit[y].contains(","))
-									commaRemoveCounter++;
-								if (commaRemoveCounter > 3) 
-									break;
-								currentLine = currentLine + currentLineSplit[y];
-							}
-						}
-						String input = currentLine + ", " + feelingRating + ", " + feelingComment;
-						buf.append(input);
-					}
-					else if (!yes)
-						buf.append(currentLine);
 				}
-				else
-					buf.append(currentLine);
-				
-				buf.flush();
-				buf.newLine();
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		try {
-			buf.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		} catch (IOException e) {}
 		
-		injectionDataFile.delete();
-		injectionDataFileTemp.renameTo(injectionDataFile);
+		
+		
+		InputStream in4 = null;
+		try {
+			in4 = new BufferedInputStream(new FileInputStream(injectionDataFile));
+		} catch (FileNotFoundException e) {
+			Toast.makeText(this,"Cant find the file", Toast.LENGTH_LONG).show();
+			e.printStackTrace();
+		}
+		BufferedReader br4 = new BufferedReader(new InputStreamReader(in4));
+		
+		if (!done) {
+				Toast.makeText(this,"Not done so entering here", Toast.LENGTH_LONG).show();
+				BufferedWriter buf = null;
+				try {
+					buf = new BufferedWriter(new FileWriter(injectionDataFileTemp));
+				} catch (IOException e2) {
+					e2.printStackTrace();
+				}
+				String currentLine;
+				try {
+					while ((currentLine = br4.readLine()) != null) {
+						if (currentLine.contains(spinnerSelection)) {
+							double feelingRating = feelingRatingBar.getRating();
+							String feelingComment = feelingCommentText.getText().toString();
+							feelingComment = escapeCommas(feelingComment);
+							String input = currentLine + ", " + feelingRating + ", " + feelingComment;
+							buf.append(input);
+						}
+						else
+							buf.append(currentLine);
+						buf.flush();
+						buf.newLine();
+					}
+				} catch (IOException e) {}
+				try {
+					buf.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				injectionDataFile.delete();
+				injectionDataFileTemp.renameTo(injectionDataFile);
+			}
+		return waiting;
 	}
 
 	private String escapeCommas(String feelingComment) {
@@ -243,6 +252,74 @@ public class FeelingRater extends Activity {
 			feelingComment = feelingComment + feelingCommentSplit[x];
 		}
 		return feelingComment;
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		Toast.makeText(this,"finished", Toast.LENGTH_LONG).show();
+		if (requestCode == 1) {
+		     if(resultCode == RESULT_OK)
+		    	 yes = data.getBooleanExtra("selectionResult", true);
+		     if (resultCode == RESULT_CANCELED)
+		    	 yes = false;
+		}
+		
+		if (yes) {
+			Toast.makeText(this, "YES", Toast.LENGTH_LONG).show();
+			InputStream in3 = null;
+			try {
+				in3 = new BufferedInputStream(new FileInputStream(injectionDataFile));
+			} catch (FileNotFoundException e) {
+				Toast.makeText(this,"Cant find the file", Toast.LENGTH_LONG).show();
+				e.printStackTrace();
+			}
+			String spinnerSelection = injectionSpinner.getSelectedItem().toString();
+			BufferedReader br3 = new BufferedReader(new InputStreamReader(in3));
+			BufferedWriter buf = null;
+			try {
+				buf = new BufferedWriter(new FileWriter(injectionDataFileTemp));
+			} catch (IOException e2) {
+				e2.printStackTrace();
+			}
+			String currentLine;
+			try {
+				while ((currentLine = br3.readLine()) != null) {
+					if (currentLine.contains(spinnerSelection)) {
+						double feelingRating = feelingRatingBar.getRating();
+						String feelingComment = feelingCommentText.getText().toString();
+						feelingComment = escapeCommas(feelingComment);
+						String input = currentLine + ", " + feelingRating + ", " + feelingComment;
+						buf.append(input);
+					}
+					else {
+						buf.append(currentLine);
+					}
+					buf.flush();
+					buf.newLine();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				buf.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			injectionDataFile.delete();
+			injectionDataFileTemp.renameTo(injectionDataFile);
+		}
+		
+		else {
+			//Don't overwrite the rating line
+			Toast.makeText(null,"NO", Toast.LENGTH_LONG).show();
+		}
+		finish();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		Log.w("Diabetes Debug", "Feeling rater activity is ending now");
 	}
 }
 

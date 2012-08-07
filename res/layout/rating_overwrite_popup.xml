@@ -3,13 +3,14 @@
     android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-
+    android:orientation="vertical" 
+	android:excludeFromRecents="true">
+    
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="You have already rated this injection, are you sure that you want to overwrite the existing rating?"
+        android:text="Overwrite existing rating?"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
