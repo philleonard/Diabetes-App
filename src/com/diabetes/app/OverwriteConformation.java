@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class OverwriteConformation extends Activity {
 	
-	public boolean selection = true;
+	public boolean selection;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -19,9 +19,9 @@ public class OverwriteConformation extends Activity {
 			
 			public void onClick(View v) {
 				selection = true;
-				Intent returnIntent = new Intent();
-				returnIntent.putExtra("selectionResult", selection);
-				setResult(RESULT_OK,returnIntent);     
+				Intent returnYesIntent = new Intent();
+				returnYesIntent.putExtra("selectionResult", selection);
+				setResult(RESULT_OK,returnYesIntent);     
 				finish();
 			}
 		});
@@ -31,9 +31,9 @@ public class OverwriteConformation extends Activity {
 			
 			public void onClick(View v) {
 				selection = false;
-				Intent returnIntent = new Intent();
-				returnIntent.putExtra("selectionResult", selection);
-				setResult(RESULT_OK,returnIntent); 
+				Intent returnNoIntent = new Intent();
+				returnNoIntent.putExtra("selectionResult", selection);
+				setResult(RESULT_OK,returnNoIntent); 
 				finish();
 			}
 		});

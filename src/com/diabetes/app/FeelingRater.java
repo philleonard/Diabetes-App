@@ -45,7 +45,7 @@ public class FeelingRater extends Activity {
 	private TextView rateErrorBox;
 	private boolean storageFound = true;
 	private boolean injectionDataMade = true;
-	private boolean yes = true;
+	private boolean yes = false;
 	private int lineCount = 0;
 	private File injectionDataFile = new File(Environment.getExternalStorageDirectory().toString()+"/Diabetes_Health_Tracker_Data/injection_data.csv");
 	private File injectionDataFileTemp = new File(injectionDataFile.toString() + ".temp");
@@ -188,9 +188,7 @@ public class FeelingRater extends Activity {
 					if (thisCommaCount > 3) {
 						done = true;
 						waiting = true;
-						startActivityForResult(new Intent(getApplicationContext(), OverwriteConformation.class), 0);
-						Log.w("Diabetes Debug", "The activity ends now!");
-						//Feeling Rater activity ending while OverwriteConformation still running.
+						startActivityForResult(new Intent(getApplicationContext(), OverwriteConformation.class), 1);
 					}
 				}
 			}
@@ -256,16 +254,16 @@ public class FeelingRater extends Activity {
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		Toast.makeText(this,"finished", Toast.LENGTH_LONG).show();
+		
 		if (requestCode == 1) {
 		     if(resultCode == RESULT_OK)
-		    	 yes = data.getBooleanExtra("selectionResult", true);
+		    	 yes = data.getBooleanExtra("selectionResult", false);
 		     if (resultCode == RESULT_CANCELED)
 		    	 yes = false;
 		}
 		
 		if (yes) {
-			Toast.makeText(this, "YES", Toast.LENGTH_LONG).show();
+			Toast.makeText(this,"Rating overwritten", Toast.LENGTH_SHORT).show();
 			InputStream in3 = null;
 			try {
 				in3 = new BufferedInputStream(new FileInputStream(injectionDataFile));
@@ -307,19 +305,18 @@ public class FeelingRater extends Activity {
 			}
 			injectionDataFile.delete();
 			injectionDataFileTemp.renameTo(injectionDataFile);
+			finish();
 		}
 		
-		else {
+		else if (!yes) {
 			//Don't overwrite the rating line
-			Toast.makeText(null,"NO", Toast.LENGTH_LONG).show();
+			Toast.makeText(this,"Rating not overwritten", Toast.LENGTH_SHORT).show();
 		}
-		finish();
 	}
 	
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		Log.w("Diabetes Debug", "Feeling rater activity is ending now");
 	}
 }
 
