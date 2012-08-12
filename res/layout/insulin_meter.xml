@@ -22,21 +22,13 @@
         android:text="Daily Insulin Pen Capacity" />
 
     <TextView
-        android:id="@+id/ONInsulinRemaining"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/OvernightInsulinBar"
-        android:text="ON rem" />
-
-    <TextView
         android:id="@+id/insulinPenON"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/OvernightInsulinBar"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="30dp"
-        android:text="OverNight Insulin Pen Capacity" />
+        android:text="Over Night Insulin Pen Capacity" />
 
     <ProgressBar
         android:id="@+id/DailyInsulinBar"
@@ -47,33 +39,25 @@
         android:layout_below="@+id/insulinPenDay"
         android:max="100" />
 
-    <TextView
-        android:id="@+id/DailyInsulinRemaining"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/DailyInsulinBar"
-        android:text="DailyInRem" />
-
     <Button
         android:id="@+id/resetDay"
         android:layout_width="50dp"
         android:layout_height="30dp"
-        android:layout_above="@+id/DailyInsulinRemaining"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/insulinPenDay"
         android:layout_toRightOf="@+id/DailyInsulinBar"
-        android:text="Reset (300 Units)"
+        android:text="Refill"
         android:textSize="10dp" />
 
     <Button
         android:id="@+id/resetON"
         android:layout_width="50dp"
         android:layout_height="30dp"
+        android:layout_alignBottom="@+id/OvernightInsulinBar"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/OvernightInsulinBar"
         android:layout_toRightOf="@+id/OvernightInsulinBar"
-        android:text="Reset (300 Units)"
+        android:text="Refill"
         android:textSize="10dp" />
 
 </RelativeLayout>

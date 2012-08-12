@@ -38,7 +38,7 @@ public class DiabetesApplicationActivity extends TabActivity {
       
         SdAvail sd = new SdAvail();
 		if (!sd.check() || !sd.injectionDataCheck())
-			Toast.makeText(this,"External Storage not found. Unable to write data" , Toast.LENGTH_LONG).show();
+			Toast.makeText(this,"External Storage not found." , Toast.LENGTH_LONG).show();
 		
 		TabHost tabHost = getTabHost();
 		

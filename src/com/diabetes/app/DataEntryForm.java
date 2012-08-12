@@ -9,6 +9,7 @@ import java.util.Date;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.format.DateFormat;
@@ -17,6 +18,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +39,9 @@ public class DataEntryForm extends Activity {
 	private double thisInsulinDose;
 	private boolean sdCardPresent;
 	private boolean injectionDataPresent;
-	
+	private static final String PREFS_NAME = "insulinLevelPref";
+	private SharedPreferences levels;
+	private RadioGroup penRadio;
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.data_entry);
@@ -44,7 +49,7 @@ public class DataEntryForm extends Activity {
 		bloodSugarText = (EditText) findViewById(R.id.bloodSugarEditText);
 		carbContentText = (EditText) findViewById(R.id.carbContentEditText);
 		insulinDoseText = (EditText) findViewById(R.id.insulinDoseEditText);
-		
+		penRadio = (RadioGroup) findViewById(R.id.radioGroup1);
 		errorBox = (TextView) findViewById(R.id.dataEntryErrorBox);
 	    
 		enterDataButton = (Button) findViewById(R.id.goButton);
@@ -76,6 +81,8 @@ public class DataEntryForm extends Activity {
 	    		}
 				
 				if (done1 && done3) {
+					removeFromPen();
+					
 					dateStamp = dateFormat.format(date);
 					
 					String writeData;
@@ -90,6 +97,33 @@ public class DataEntryForm extends Activity {
 						errorBox.setText("External storage device not found");
 				}
 				
+			}
+
+			private void removeFromPen() {
+				if (penRadio.getCheckedRadioButtonId() == R.id.dailyRadio) {
+					levels = getSharedPreferences(PREFS_NAME, MODE_WORLD_READABLE);
+					int dailyLevel = levels.getInt("dailyLevel", 0);
+					if (dailyLevel < thisInsulinDose) {
+						//Dialog asking for confirmation to ignore remaining insulin level
+					}
+					dailyLevel = (int) (dailyLevel - thisInsulinDose);
+					SharedPreferences.Editor editor = levels.edit();
+					editor.remove("dailyLevel");
+					editor.putInt("dailyLevel", dailyLevel);
+					editor.commit();	
+				}
+				else {
+					levels = getSharedPreferences(PREFS_NAME, MODE_WORLD_READABLE);
+					int overNightLevel = levels.getInt("overNightLevel", 0);
+					if (overNightLevel < thisInsulinDose) {
+						//Dialog asking for confirmation to ignore remaining insulin level
+					}
+					overNightLevel = (int) (overNightLevel - thisInsulinDose);
+					SharedPreferences.Editor editor = levels.edit();
+					editor.remove("overNightLevel");
+					editor.putInt("overNightLevel", overNightLevel);
+					editor.commit();	
+				}
 			}
 		});
 	}

@@ -206,7 +206,7 @@ public class FeelingRater extends Activity {
 		BufferedReader br4 = new BufferedReader(new InputStreamReader(in4));
 		
 		if (!done) {
-				Toast.makeText(this,"Not done so entering here", Toast.LENGTH_LONG).show();
+
 				BufferedWriter buf = null;
 				try {
 					buf = new BufferedWriter(new FileWriter(injectionDataFileTemp));
