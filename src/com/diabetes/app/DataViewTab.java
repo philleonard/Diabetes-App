@@ -12,10 +12,17 @@ public class DataViewTab extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.data_view_tab);	
 		
-		Button dataEntryButton = (Button) findViewById(R.id.dataViewButton);
-		dataEntryButton.setOnClickListener(new OnClickListener() {
+		Button dataViewButton = (Button) findViewById(R.id.dataViewButton);
+		dataViewButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				startActivity(new Intent(getApplicationContext(), ViewData.class));
+			}
+		});
+		
+		Button graphViewButton = (Button) findViewById(R.id.xyGraphButton);
+		graphViewButton.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				startActivity(new Intent(getApplicationContext(), GraphViewer.class));
 			}
 		});
 	}

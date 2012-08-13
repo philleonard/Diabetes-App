@@ -34,6 +34,10 @@
 		<activity android:name=".InsulinLevels"/>
 		<activity android:name=".OverwriteConformation"
 		    android:theme="@android:style/Theme.Dialog"/>
+		<activity android:name=".GraphViewer"/>
+		<activity android:name=".DateSelection"
+		    android:theme="@android:style/Theme.Dialog"
+		    android:windowNoTitle="true"/>
     </application>
     
     <!-- Permissions -->
