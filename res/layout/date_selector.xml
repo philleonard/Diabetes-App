@@ -5,19 +5,59 @@
     android:gravity="center_horizontal"
     android:orientation="vertical" >
 
-    <DatePicker
-        android:id="@+id/datePicker1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:id="@+id/RelativeLayout01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
 
-    <DatePicker
-        android:id="@+id/datePicker2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <DatePicker
+            android:id="@+id/fromDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true" />
 
+        <TextView
+            android:id="@+id/TextView01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/fromDate"
+            android:text="From:"
+            android:textAppearance="?android:attr/textAppearanceSmall" android:textColor="#FFFFFF"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <DatePicker
+            android:id="@+id/toDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/toDate"
+            android:text="To:"
+            android:textAppearance="?android:attr/textAppearanceSmall" android:textColor="#FFFFFF"/>
+
+    </RelativeLayout>tent"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/datePicker1"
+            android:text="From:"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
     <Button
         android:id="@+id/goDateButton"
-        android:layout_width="188dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Submit" />
 
