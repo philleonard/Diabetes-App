@@ -25,5 +25,12 @@ public class DataViewTab extends Activity {
 				startActivity(new Intent(getApplicationContext(), GraphViewer.class));
 			}
 		});
+		
+		Button exportDataButton = (Button) findViewById(R.id.exportDataButton);
+		exportDataButton.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				startActivity(new Intent(getApplicationContext(), ExportData.class));
+			}
+		});
 	}
 }

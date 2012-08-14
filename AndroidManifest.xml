@@ -26,6 +26,7 @@
         <!-- Other Activities -->
         <activity android:name=".DataEntryForm"/>
         <activity android:name=".ViewData"/>
+        <activity android:name=".ExportData"/>
 		<activity android:name=".FeelingRater"/>
 		<activity android:name=".DataEntryTab"/>
 		<activity android:name=".DataViewTab"/>
