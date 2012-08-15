@@ -15,13 +15,13 @@ import org.achartengine.chart.XYChart;
 
 public class GraphViewer extends Activity {
 	
-	private Spinner dataTypeSpinner = (Spinner) findViewById(R.id.graphTypeSpin);
+	private Spinner dataTypeSpinner;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.xy_chart);
-		
+		dataTypeSpinner = (Spinner) findViewById(R.id.graphTypeSpin);
 		
 		final String spinnerItems[] = {"Insulin Levels", "Blood Sugar Levels", "Carbohydrate Levels",};
 		ArrayAdapter itemsAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, spinnerItems);
