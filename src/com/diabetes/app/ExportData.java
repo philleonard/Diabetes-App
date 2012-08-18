@@ -56,13 +56,13 @@ public class ExportData extends Activity {
 			e.printStackTrace();
 		}
 
-		/*File targetFile = new File(file);
+		File targetFile = new File(file);
 		Uri targetUri = Uri.fromFile(targetFile);
 
 		Intent intent = new Intent(Intent.ACTION_VIEW);
 		intent.setDataAndType(targetUri, "application/pdf");
 
-		startActivity(intent);*/
+		startActivity(intent);
 	}
 
 }
