@@ -1,12 +1,15 @@
 package com.diabetes.app;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Section;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -19,7 +22,13 @@ import android.os.Environment;
 
 public class ExportData extends Activity {
 
+	File Data = new File(Environment.getExternalStorageDirectory() + "/Diabetes_Health_Tracker_Data/injection_data.csv");
 	String file = Environment.getExternalStorageDirectory() + "/Diabetes_Health_Tracker_Data/Data.pdf";
+	String Date;
+	String BloodSugar;
+	String CarbonContent;
+	String InsulinDose;
+	String Feeling;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -27,29 +36,60 @@ public class ExportData extends Activity {
 			Document document = new Document();
 
 			PdfWriter.getInstance(document,new FileOutputStream(file));
+
 			document.open();
 
-			Paragraph p = new Paragraph("Hello");
+			Paragraph p = new Paragraph();
 
-			/*PdfPTable table = new PdfPTable(4);
+			PdfPTable table = new PdfPTable(6);
+			
+			PdfPCell cell = new PdfPCell(new Phrase("Date"));
+			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+			table.addCell(cell);
 
-			PdfPCell c1 = new PdfPCell(new Phrase("Table Header 1"));
-			c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-			table.addCell(c1);
+			cell = new PdfPCell(new Phrase("Blood Sugar"));
+			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+			table.addCell(cell);
 
-			PdfPCell c2 = new PdfPCell(new Phrase("Table Header 1"));
-			c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-			table.addCell(c2);
+			cell = new PdfPCell(new Phrase("Carbon Content"));
+			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+			table.addCell(cell);
 
-			PdfPCell c3 = new PdfPCell(new Phrase("Table Header 1"));
-			c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-			table.addCell(c3);
+			cell = new PdfPCell(new Phrase("Insulin Dose"));
+			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+			table.addCell(cell);
+			
+			cell = new PdfPCell(new Phrase("Rating"));
+			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+			table.addCell(cell);
+			
+			cell = new PdfPCell(new Phrase("Comment"));
+			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+			table.addCell(cell);
+			
 
-			PdfPCell c4 = new PdfPCell(new Phrase("Table Header 1"));
-			c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-			table.addCell(c4);*/
+			BufferedReader reader = new BufferedReader(new FileReader(Data));
 
+			String Line;
+			String[] Temp;
+			while ((Line = reader.readLine()) != null) {
+				
+				Temp = Line.split(",");
+				for(int i = 0; i < Temp.length; i++){
+					table.addCell(Temp[i]);
+				}
+				
+				if(Temp.length == 4){
+					table.addCell("N/A");
+					table.addCell("N/A");
+				}
+			}
+
+
+			p.add(table);			
 			document.add(p);
+
+
 			document.close();
 
 		} catch (Exception e) {
@@ -63,6 +103,7 @@ public class ExportData extends Activity {
 		intent.setDataAndType(targetUri, "application/pdf");
 
 		startActivity(intent);
+		finish();
 	}
 
 }
