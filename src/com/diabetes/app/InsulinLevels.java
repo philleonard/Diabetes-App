@@ -38,7 +38,7 @@ public class InsulinLevels extends Activity {
 		resetDay.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
-				dailyLevel = 30;
+				dailyLevel = 30; //Get daily level from global var in settings
 				dailyBar.setProgress(dailyLevel);
 			}
 		});
@@ -47,7 +47,7 @@ public class InsulinLevels extends Activity {
 		resetNight.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
-				overNightLevel = 30;
+				overNightLevel = 30; //Get night level from global var in settings
 				overNightBar.setProgress(overNightLevel);
 			}
 		});

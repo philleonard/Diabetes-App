@@ -3,30 +3,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
+
         <Button
-        android:id="@+id/dataViewButton"
-        android:layout_width="172dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="View Data" />
-
-        <Button
-            android:id="@+id/xyGraphButton"
-            android:layout_width="wrap_content"
+            android:id="@+id/dataViewButton"
+            android:layout_width="172dp"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/dataViewButton"
-            android:layout_alignRight="@+id/dataViewButton"
-            android:layout_below="@+id/dataViewButton"
-            android:text="Graphs" />
-
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:text="View Data" />
+
         <Button
             android:id="@+id/exportDataButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/dataViewButton"
-            android:layout_alignRight="@+id/dataViewButton"
-            android:layout_marginTop="94dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/dataViewButton"
             android:text="Export Data" />
         
 </RelativeLayout>

@@ -19,13 +19,6 @@ public class DataViewTab extends Activity {
 			}
 		});
 		
-		Button graphViewButton = (Button) findViewById(R.id.xyGraphButton);
-		graphViewButton.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				startActivity(new Intent(getApplicationContext(), GraphViewer.class));
-			}
-		});
-		
 		Button exportDataButton = (Button) findViewById(R.id.exportDataButton);
 		exportDataButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {

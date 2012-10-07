@@ -8,7 +8,8 @@
         android:id="@+id/dataEntryButton"
         android:layout_width="172dp"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:text="Entry" />
 
     <Button
@@ -16,6 +17,7 @@
         android:layout_width="172dp"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/dataEntryButton"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/dataEntryButton"
         android:text="Rate" />
 
