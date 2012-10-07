@@ -286,7 +286,26 @@ public class FeelingRater extends Activity {
 						double feelingRating = feelingRatingBar.getRating();
 						String feelingComment = feelingCommentText.getText().toString();
 						feelingComment = escapeCommas(feelingComment);
-						String input = currentLine + ", " + feelingRating + ", " + feelingComment;
+						
+						String newCurrentLine = "";
+						boolean doneThis = false;
+						String[] currentLineSplit = currentLine.split("");
+						int commaCounter = 0;
+						
+						for (int loopC = 0; loopC < currentLineSplit.length; loopC++) {
+							
+							newCurrentLine = newCurrentLine + currentLineSplit[loopC];
+							
+							if (currentLineSplit[loopC].contains(","))
+								commaCounter++;
+							
+							if (commaCounter > 3) {
+								break;
+							}
+						}
+						
+						String input = newCurrentLine + " " + feelingRating + ", " + feelingComment;
+						buf.flush();
 						buf.append(input);
 					}
 					else {
