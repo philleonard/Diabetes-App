@@ -60,4 +60,22 @@
         android:text="Refill"
         android:textSize="10dp" />
 
+    <TextView
+        android:id="@+id/dailyInsilinLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/DailyInsulinBar"
+        android:text="Daily Insulin Pen Level: "
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/ONInsilinPenLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/OvernightInsulinBar"
+        android:text="Overnight Insulin Pen Level: "
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
 </RelativeLayout>

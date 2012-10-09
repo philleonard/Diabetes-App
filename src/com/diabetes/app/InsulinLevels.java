@@ -9,14 +9,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 public class InsulinLevels extends Activity {
 	
 	private int overNightLevel;
 	private int dailyLevel;
-	private int overNightLevelPercent;
-	private int dailyLevelPercent;
-	private int totalSyringe = 30; //Assign to a preference selected in settings
+	private int daySyringeMax;
+	private int nightSyringeMax;
 	private static final String PREFS_NAME = "insulinLevelPref";
 	private SharedPreferences levels;
 	//totalSyringe should be from a settings value for different sized syringes.
@@ -27,19 +27,26 @@ public class InsulinLevels extends Activity {
 		
 		load();
 		final ProgressBar dailyBar = (ProgressBar) findViewById(R.id.DailyInsulinBar);
-		dailyBar.setMax(totalSyringe);
+		dailyBar.setMax(daySyringeMax);
 		dailyBar.setProgress(dailyLevel);
 		
+		final TextView dailyInsulinLevel = (TextView) findViewById(R.id.dailyInsilinLevel);
+		dailyInsulinLevel.setText("Daily Insulin Pen Level: " + dailyLevel);
+		
 		final ProgressBar overNightBar = (ProgressBar) findViewById(R.id.OvernightInsulinBar);
-		overNightBar.setMax(totalSyringe);
+		overNightBar.setMax(nightSyringeMax);
 		overNightBar.setProgress(overNightLevel);
+		
+		final TextView ONInsulinLevel = (TextView) findViewById(R.id.ONInsilinPenLevel);
+		ONInsulinLevel.setText("Overnight Insulin Pen Level: " + overNightLevel);
 		
 		Button resetDay = (Button) findViewById(R.id.resetDay);
 		resetDay.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
-				dailyLevel = 30; //Get daily level from global var in settings
+				dailyLevel = daySyringeMax; //Get daily level from global var in settings
 				dailyBar.setProgress(dailyLevel);
+				dailyInsulinLevel.setText("Daily Insulin Pen Level: " + dailyLevel);
 			}
 		});
 		
@@ -47,8 +54,9 @@ public class InsulinLevels extends Activity {
 		resetNight.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
-				overNightLevel = 30; //Get night level from global var in settings
+				overNightLevel = nightSyringeMax; //Get night level from global var in settings
 				overNightBar.setProgress(overNightLevel);
+				ONInsulinLevel.setText("Overnight Insulin Pen Level: " + overNightLevel);
 			}
 		});
 	}
@@ -103,5 +111,7 @@ public class InsulinLevels extends Activity {
 		levels = getSharedPreferences(PREFS_NAME, MODE_WORLD_READABLE);
 		dailyLevel = levels.getInt("dailyLevel", 0);
 		overNightLevel = levels.getInt("overNightLevel", 0);
+		daySyringeMax = levels.getInt("daySyringeMax", 30);
+		nightSyringeMax = levels.getInt("nightSyringeMax", 30);
 	}
 }

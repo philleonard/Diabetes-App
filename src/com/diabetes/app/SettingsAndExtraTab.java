@@ -18,5 +18,12 @@ public class SettingsAndExtraTab extends Activity {
 				startActivity(new Intent(getApplicationContext(), InsulinLevels.class));
 			}
 		});
+		
+		Button settingsButton = (Button) findViewById(R.id.settingButtons);
+		settingsButton.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				startActivity(new Intent(getApplicationContext(), Settings.class));
+			}
+		});
 	}
 }
