@@ -33,6 +33,7 @@
 		<activity android:name=".SettingsAndExtraTab"/>
 		<activity android:name=".SplashScreen"/>
 		<activity android:name=".InsulinLevels"/>
+		<activity android:name=".Settings"/>
 		<activity android:name=".OverwriteConformation"
 		    android:theme="@android:style/Theme.Dialog"/>
 		<activity android:name=".GraphViewer"/>

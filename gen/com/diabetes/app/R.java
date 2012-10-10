@@ -25,7 +25,7 @@ public final class R {
         public static final int ONInsilinPenLevel=0x7f06001a;
         public static final int OvernightInsulinBar=0x7f060013;
         public static final int RelativeLayout1=0x7f060008;
-        public static final int appNameText=0x7f060027;
+        public static final int appNameText=0x7f06002f;
         public static final int bloodSugarEditText=0x7f060000;
         public static final int carbContentEditText=0x7f060001;
         public static final int dailyInsilinLevel=0x7f060019;
@@ -34,8 +34,12 @@ public final class R {
         public static final int dataEntryErrorBox=0x7f060007;
         public static final int dataViewButton=0x7f06000b;
         public static final int dayPenEditor=0x7f060021;
-        public static final int dayPenTitle=0x7f06001e;
-        public static final int diabeteslogoimage=0x7f060025;
+        public static final int dayPenTitle=0x7f060020;
+        public static final int dayValue=0x7f060022;
+        public static final int dayWLI=0x7f06002a;
+        public static final int dayWarnLevelEdit=0x7f060027;
+        public static final int dayWarningLevel=0x7f060026;
+        public static final int diabeteslogoimage=0x7f06002d;
         public static final int exportDataButton=0x7f06000c;
         public static final int feelingComment=0x7f060010;
         public static final int feelingRatingBar=0x7f06000f;
@@ -43,23 +47,27 @@ public final class R {
         public static final int goButton=0x7f060006;
         public static final int injectionSelector=0x7f06000e;
         public static final int insulinDoseEditText=0x7f060002;
-        public static final int insulinLevelsButton=0x7f060023;
+        public static final int insulinLevelsButton=0x7f06001e;
         public static final int insulinPenDay=0x7f060014;
         public static final int insulinPenON=0x7f060015;
-        public static final int logo=0x7f060026;
-        public static final int nightPenEditor=0x7f06001f;
-        public static final int nightPenTitle=0x7f060020;
+        public static final int logo=0x7f06002e;
+        public static final int nightPenEditor=0x7f060024;
+        public static final int nightPenTitle=0x7f060023;
         public static final int nightRadio=0x7f060005;
+        public static final int nightValue=0x7f060025;
+        public static final int nightWLI=0x7f06002c;
+        public static final int nightWarnLevelEdit=0x7f06002b;
+        public static final int nightWarningLevel=0x7f060029;
         public static final int noRatingSelection=0x7f06001d;
         public static final int radioGroup1=0x7f060003;
         public static final int ratingButton=0x7f06000a;
         public static final int resetDay=0x7f060017;
         public static final int resetON=0x7f060018;
-        public static final int saveButton=0x7f060022;
-        public static final int settingButtons=0x7f060024;
+        public static final int saveButton=0x7f060028;
+        public static final int settingButtons=0x7f06001f;
         public static final int textView1=0x7f06000d;
         public static final int textView2=0x7f060012;
-        public static final int viewDataTable=0x7f060028;
+        public static final int viewDataTable=0x7f060030;
         public static final int yesRatingSelection=0x7f06001c;
     }
     public static final class layout {
@@ -70,8 +78,8 @@ public final class R {
         public static final int insulin_meter=0x7f030004;
         public static final int main=0x7f030005;
         public static final int rating_overwrite_popup=0x7f030006;
-        public static final int settings=0x7f030007;
-        public static final int settings_tab=0x7f030008;
+        public static final int settings_tab=0x7f030007;
+        public static final int settingspage=0x7f030008;
         public static final int splash_screen=0x7f030009;
         public static final int view_data=0x7f03000a;
     }

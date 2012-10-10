@@ -28,6 +28,9 @@ public class InsulinLevels extends Activity {
 		load();
 		final ProgressBar dailyBar = (ProgressBar) findViewById(R.id.DailyInsulinBar);
 		dailyBar.setMax(daySyringeMax);
+		if (dailyLevel>daySyringeMax) {
+			dailyLevel = daySyringeMax;
+		}
 		dailyBar.setProgress(dailyLevel);
 		
 		final TextView dailyInsulinLevel = (TextView) findViewById(R.id.dailyInsilinLevel);
@@ -35,6 +38,9 @@ public class InsulinLevels extends Activity {
 		
 		final ProgressBar overNightBar = (ProgressBar) findViewById(R.id.OvernightInsulinBar);
 		overNightBar.setMax(nightSyringeMax);
+		if (overNightLevel>nightSyringeMax) {
+			overNightLevel = nightSyringeMax;
+		}
 		overNightBar.setProgress(overNightLevel);
 		
 		final TextView ONInsulinLevel = (TextView) findViewById(R.id.ONInsilinPenLevel);
