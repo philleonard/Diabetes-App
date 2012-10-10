@@ -103,10 +103,26 @@ public class DataEntryForm extends Activity {
 				if (penRadio.getCheckedRadioButtonId() == R.id.dailyRadio) {
 					levels = getSharedPreferences(PREFS_NAME, MODE_WORLD_READABLE);
 					int dailyLevel = levels.getInt("dailyLevel", 0);
-					if (dailyLevel < thisInsulinDose) {
-						//Dialog asking for confirmation to ignore remaining insulin level
+					int dayWarn = levels.getInt("dayWarningLevel", 0);
+					boolean toastAlready = false;
+					
+					if (dailyLevel <= thisInsulinDose) {
+						if (dailyLevel < thisInsulinDose) {
+							makeToastText(3);
+						}
+						else if (dailyLevel == thisInsulinDose) {
+							makeToastText(5);
+						}
+						dailyLevel = 0;
+						toastAlready = true;
 					}
-					dailyLevel = (int) (dailyLevel - thisInsulinDose);
+					else {
+						dailyLevel = (int) (dailyLevel - thisInsulinDose);
+					}
+					
+					if (!toastAlready && dailyLevel < dayWarn) {
+						makeToastText(1);
+					}
 					SharedPreferences.Editor editor = levels.edit();
 					editor.remove("dailyLevel");
 					editor.putInt("dailyLevel", dailyLevel);
@@ -115,10 +131,26 @@ public class DataEntryForm extends Activity {
 				else {
 					levels = getSharedPreferences(PREFS_NAME, MODE_WORLD_READABLE);
 					int overNightLevel = levels.getInt("overNightLevel", 0);
-					if (overNightLevel < thisInsulinDose) {
-						//Dialog asking for confirmation to ignore remaining insulin level
+					int nightWarn = levels.getInt("nightWarningLevel", 0);
+					boolean toastAlready = false;
+					
+					if (overNightLevel <= thisInsulinDose) {
+						if (overNightLevel < thisInsulinDose) {
+							makeToastText(4);
+						}
+						else if (overNightLevel == thisInsulinDose) {
+							makeToastText(6);
+						}
+						toastAlready = true;
+						overNightLevel = 0;
 					}
-					overNightLevel = (int) (overNightLevel - thisInsulinDose);
+					else {
+						overNightLevel = (int) (overNightLevel - thisInsulinDose);
+					}
+					
+					if (!toastAlready && overNightLevel < nightWarn) {
+						makeToastText(2);
+					}
 					SharedPreferences.Editor editor = levels.edit();
 					editor.remove("overNightLevel");
 					editor.putInt("overNightLevel", overNightLevel);
@@ -126,6 +158,27 @@ public class DataEntryForm extends Activity {
 				}
 			}
 		});
+	}
+	
+	public void makeToastText(int choice) {
+		if (choice == 1) {
+			Toast.makeText(this,"WARNING: DAY TIME INSULIN PEN LOW!", Toast.LENGTH_LONG).show();
+		}
+		else if (choice == 2){
+			Toast.makeText(this,"WARNING: NIGHT TIME INSULIN PEN LOW!", Toast.LENGTH_LONG).show();
+		}
+		else if (choice == 3) {
+			Toast.makeText(this,"WARNING: DAY TIME INSULIN PEN EMPTY! IGNORING NEGATIVE CAPACITY.", Toast.LENGTH_LONG).show();
+		}
+		else if (choice == 4) {
+			Toast.makeText(this,"WARNING: NIGHT TIME INSULIN PEN EMPTY! IGNORING NEGATIVE CAPACITY.", Toast.LENGTH_LONG).show();
+		}
+		else if (choice == 5) {
+			Toast.makeText(this,"WARNING: DAY TIME INSULIN PEN EMPTY!", Toast.LENGTH_LONG).show();
+		}
+		else if (choice == 6) {
+			Toast.makeText(this,"WARNING: NIGHT TIME INSULIN PEN EMPTY!", Toast.LENGTH_LONG).show();
+		}
 	}
 	
 	public boolean writeDataToInjectionData(String appendDataString) {

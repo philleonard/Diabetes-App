@@ -62,6 +62,7 @@ public class Settings extends Activity {
 				nightValue.setText("Current Value: " + nightSyringeMax);
 				dayWLI.setText("Current Warning Level: " + dayWarnLevel);
 				nightWLI.setText("Current Warning Level: " + nightWarnLevel);
+				finish();
 				}
 		});
 		
