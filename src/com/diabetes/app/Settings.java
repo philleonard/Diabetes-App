@@ -8,6 +8,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Settings extends Activity {
 	
@@ -15,6 +16,8 @@ public class Settings extends Activity {
 	private int nightSyringeMax;
 	private int dayWarnLevel;
 	private int nightWarnLevel;
+	private int tempDayWarnLevel;
+	private int tempNightWarnLevel;
 	private static final String PREFS_NAME = "insulinLevelPref";
 	private SharedPreferences levels;
 	
@@ -52,10 +55,22 @@ public class Settings extends Activity {
 					nightSyringeMax = Integer.parseInt(nightPenEditor.getText().toString());
 					}catch (Exception e){}
 				try {
-					dayWarnLevel = Integer.parseInt(dayWarnEdit.getText().toString());
+					tempDayWarnLevel = Integer.parseInt(dayWarnEdit.getText().toString());
+					if (tempDayWarnLevel<daySyringeMax) {
+						dayWarnLevel=tempDayWarnLevel;
+					}
+					else {
+						printError(1);
+					}
 					}catch (Exception e){}
 				try {
-					nightWarnLevel = Integer.parseInt(nightWarnEdit.getText().toString());
+					tempNightWarnLevel = Integer.parseInt(nightWarnEdit.getText().toString());
+					if (tempNightWarnLevel<nightSyringeMax) {
+						nightWarnLevel=tempNightWarnLevel;
+					}
+					else {
+						printError(2);
+					}
 					}catch (Exception e){}
 				save();
 				dayValue.setText("Current Value: " + daySyringeMax);
@@ -67,6 +82,15 @@ public class Settings extends Activity {
 		});
 		
 		
+	}
+	
+	private void printError (int choice) {
+		if (choice == 1) {
+			Toast.makeText(this,"WARNING: You have set your warning level for you day pen higher that its maximum. Please try a lower value.", Toast.LENGTH_LONG).show();
+		}
+		else {
+			Toast.makeText(this,"WARNING: You have set your warning level for you overnight pen higher that its maximum. Please try a lower value.", Toast.LENGTH_LONG).show();
+		}
 	}
 	
 	@Override
@@ -116,8 +140,8 @@ public class Settings extends Activity {
 	
 	private void load() {
 		levels = getSharedPreferences(PREFS_NAME, MODE_WORLD_READABLE);
-		daySyringeMax = levels.getInt("daySyringeMax", 0);
-		nightSyringeMax = levels.getInt("nightSyringeMax", 0);
+		daySyringeMax = levels.getInt("daySyringeMax", 30);
+		nightSyringeMax = levels.getInt("nightSyringeMax", 30);
 		dayWarnLevel = levels.getInt("dayWarningLevel", 0);
 		nightWarnLevel = levels.getInt("nightWarningLevel", 0);
 	}	

@@ -8,8 +8,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class InsulinLevels extends Activity {
 	
@@ -17,6 +19,8 @@ public class InsulinLevels extends Activity {
 	private int dailyLevel;
 	private int daySyringeMax;
 	private int nightSyringeMax;
+	private int tempDayLevel;
+	private int tempNightLevel;
 	private static final String PREFS_NAME = "insulinLevelPref";
 	private SharedPreferences levels;
 	//totalSyringe should be from a settings value for different sized syringes.
@@ -46,6 +50,49 @@ public class InsulinLevels extends Activity {
 		final TextView ONInsulinLevel = (TextView) findViewById(R.id.ONInsilinPenLevel);
 		ONInsulinLevel.setText("Overnight Insulin Pen Level: " + overNightLevel);
 		
+		final EditText dayTopUp = (EditText) findViewById(R.id.dayTUEdit);
+		final EditText nightTopUp = (EditText) findViewById(R.id.nightTUEdit);
+		
+		Button topUpDayBut = (Button) findViewById(R.id.dayTopUp);
+		
+		topUpDayBut.setOnClickListener(new OnClickListener() {
+			
+			public void onClick(View v) {
+				try{
+					tempDayLevel = Integer.parseInt(dayTopUp.getText().toString());
+					if (tempDayLevel <= daySyringeMax-dailyLevel) {
+						dailyLevel = dailyLevel+tempDayLevel;
+						dailyBar.setProgress(dailyLevel);
+						dailyInsulinLevel.setText("Daily Insulin Pen Level: " + dailyLevel);
+					}
+					else {
+						printError(1);
+					}
+				}catch (Exception e){}
+			}
+		});
+		
+		Button topUpNightBut = (Button) findViewById(R.id.nightTopUp);
+		topUpNightBut.setOnClickListener(new OnClickListener() {
+			
+			public void onClick(View v) {
+				try{
+					tempNightLevel = Integer.parseInt(nightTopUp.getText().toString());
+					if (tempNightLevel <= nightSyringeMax-overNightLevel) {
+						overNightLevel = overNightLevel+tempNightLevel;
+						overNightBar.setProgress(overNightLevel);
+						ONInsulinLevel.setText("Overnight Insulin Pen Level: " + overNightLevel);
+					}
+					else {
+						printError(2);
+					}
+				}catch (Exception e){}
+			}
+		});
+		
+		
+		
+		
 		Button resetDay = (Button) findViewById(R.id.resetDay);
 		resetDay.setOnClickListener(new OnClickListener() {
 			
@@ -65,6 +112,15 @@ public class InsulinLevels extends Activity {
 				ONInsulinLevel.setText("Overnight Insulin Pen Level: " + overNightLevel);
 			}
 		});
+	}
+	
+	private void printError (int errorCode){
+		if (errorCode == 1) {
+			Toast.makeText(this,"WARNING: Adding " + tempDayLevel + " units would overflow the pen. The maximum this pen can hold is " + daySyringeMax, Toast.LENGTH_LONG).show();
+		}
+		else {
+			Toast.makeText(this,"WARNING: Adding " + tempNightLevel + " units would overflow the pen. The maximum this pen can hold is " + nightSyringeMax, Toast.LENGTH_LONG).show();
+		}
 	}
 	
 	@Override

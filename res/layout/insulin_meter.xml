@@ -4,15 +4,6 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <ProgressBar
-        android:id="@+id/OvernightInsulinBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="250dp"
-        android:layout_height="30dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="102dp"
-        android:max="100" />
-
     <TextView
         android:id="@+id/insulinPenDay"
         android:layout_width="fill_parent"
@@ -20,15 +11,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="Daily Insulin Pen Capacity" />
-
-    <TextView
-        android:id="@+id/insulinPenON"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/OvernightInsulinBar"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="30dp"
-        android:text="Over Night Insulin Pen Capacity" />
 
     <ProgressBar
         android:id="@+id/DailyInsulinBar"
@@ -49,17 +31,6 @@
         android:text="Refill"
         android:textSize="10dp" />
 
-    <Button
-        android:id="@+id/resetON"
-        android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:layout_alignBottom="@+id/OvernightInsulinBar"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/OvernightInsulinBar"
-        android:layout_toRightOf="@+id/OvernightInsulinBar"
-        android:text="Refill"
-        android:textSize="10dp" />
-
     <TextView
         android:id="@+id/dailyInsilinLevel"
         android:layout_width="wrap_content"
@@ -69,6 +40,48 @@
         android:text="Daily Insulin Pen Level: "
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
+    <EditText
+        android:id="@+id/dayTUEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/DailyInsulinBar"
+        android:layout_below="@+id/dailyInsilinLevel"
+        android:ems="10"
+        android:inputType="number" >
+
+        <requestFocus />
+    </EditText>
+
+    <ProgressBar
+        android:id="@+id/OvernightInsulinBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="250dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/dayTUEdit"
+        android:layout_marginTop="60dp"
+        android:layout_toLeftOf="@+id/resetDay"
+        android:max="100" />
+
+    <TextView
+        android:id="@+id/insulinPenON"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/OvernightInsulinBar"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="31dp"
+        android:text="Over Night Insulin Pen Capacity" />
+
+    <Button
+        android:id="@+id/resetON"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_alignLeft="@+id/resetDay"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/OvernightInsulinBar"
+        android:text="Refill"
+        android:textSize="10dp" />
+
     <TextView
         android:id="@+id/ONInsilinPenLevel"
         android:layout_width="wrap_content"
@@ -77,5 +90,33 @@
         android:layout_below="@+id/OvernightInsulinBar"
         android:text="Overnight Insulin Pen Level: "
         android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <Button
+        android:id="@+id/dayTopUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/dailyInsilinLevel"
+        android:layout_toRightOf="@+id/dayTUEdit"
+        android:text="Top Up" />
+
+    <Button
+        android:id="@+id/nightTopUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/ONInsilinPenLevel"
+        android:layout_toRightOf="@+id/nightTUEdit"
+        android:text="Top Up" />
+
+    <EditText
+        android:id="@+id/nightTUEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/ONInsilinPenLevel"
+        android:layout_toLeftOf="@+id/resetON"
+        android:ems="10"
+        android:inputType="number" />
 
 </RelativeLayout>
