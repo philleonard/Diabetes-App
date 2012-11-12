@@ -9,16 +9,17 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
-import com.itextpdf.text.Section;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.widget.Toast;
 
 public class ExportData extends Activity {
 
@@ -101,8 +102,15 @@ public class ExportData extends Activity {
 
 		Intent intent = new Intent(Intent.ACTION_VIEW);
 		intent.setDataAndType(targetUri, "application/pdf");
-
-		startActivity(intent);
+		
+		try {
+            startActivity(intent);
+        } 
+        catch (ActivityNotFoundException e) {
+        	
+            Toast.makeText(this, "No Application Available to View PDF\nPlease Visit the Play Store!", 
+            Toast.LENGTH_SHORT).show();
+        }
 		finish();
 	}
 
