@@ -23,21 +23,12 @@
         android:inputType="number" />
 
     <TextView
-        android:id="@+id/dayValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/dayPenEditor"
-        android:text="Current Value: "
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
         android:id="@+id/nightPenTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/dayValue"
-        android:layout_marginTop="17dp"
+        android:layout_below="@+id/dayPenEditor"
+        android:layout_marginTop="14dp"
         android:text="Overnight Insulin Pen Max:"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -55,8 +46,18 @@
         android:id="@+id/nightValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/nightPenEditor"
+        android:layout_above="@+id/nightPenEditor"
+        android:layout_marginLeft="23dp"
+        android:layout_toRightOf="@+id/nightPenTitle"
+        android:text="Current Value: "
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/dayValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/dayPenEditor"
+        android:layout_alignLeft="@+id/nightValue"
         android:text="Current Value: "
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -65,8 +66,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/nightValue"
-        android:layout_marginTop="49dp"
+        android:layout_below="@+id/nightPenEditor"
+        android:layout_marginTop="14dp"
         android:text="Day Pen Warning Level: "
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -78,19 +79,16 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/dayWarningLevel"
         android:ems="10"
-        android:inputType="number" >
+        android:inputType="number" />
 
-        <requestFocus />
-    </EditText>
-
-    <Button
-        android:id="@+id/saveButton"
+    <TextView
+        android:id="@+id/dayWLI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:text="Save" />
+        android:layout_above="@+id/dayWarnLevelEdit"
+        android:layout_alignLeft="@+id/nightValue"
+        android:text="Current Value: "
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
         android:id="@+id/nightWarningLevel"
@@ -98,19 +96,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/dayWarnLevelEdit"
-        android:layout_marginTop="61dp"
+        android:layout_marginTop="14dp"
         android:text="Overnight Pen Warning Level:"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <TextView
-        android:id="@+id/dayWLI"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/dayWarnLevelEdit"
-        android:text="Current Warning Level: "
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
     <EditText
         android:id="@+id/nightWarnLevelEdit"
         android:layout_width="wrap_content"
@@ -125,9 +114,54 @@
         android:id="@+id/nightWLI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/nightWarnLevelEdit"
+        android:layout_alignLeft="@+id/dayWLI"
+        android:text="Current Value:"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/insulinMeasurement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/nightWarnLevelEdit"
-        android:text="Current Warning Level: "
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:layout_marginTop="14dp"
+        android:text="Insulin Measurement Units" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/insulinMeasurement"
+        android:gravity="fill_horizontal"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/radioMillilitre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/insulinMeasurement"
+            android:text="Millilitres (ml)" />
+
+        <RadioButton
+            android:id="@+id/radioUnits"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:gravity="right|center_vertical"
+            android:text="Units" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/radioGroup1"
+        android:text="Save" />
 
 </RelativeLayout>

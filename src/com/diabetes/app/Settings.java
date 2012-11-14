@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 public class Settings extends Activity {
 	
@@ -20,6 +22,8 @@ public class Settings extends Activity {
 	private int tempNightWarnLevel;
 	private static final String PREFS_NAME = "insulinLevelPref";
 	private SharedPreferences levels;
+	private RadioGroup unitRadio;
+	private int penUnits; //0 = units 1 = ml
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -32,6 +36,14 @@ public class Settings extends Activity {
 		final EditText dayWarnEdit = (EditText) findViewById(R.id.dayWarnLevelEdit);
 		final EditText nightWarnEdit = (EditText) findViewById(R.id.nightWarnLevelEdit);
 		
+		unitRadio = (RadioGroup) findViewById(R.id.radioGroup1);
+		if (penUnits == 0) {
+			unitRadio.check(R.id.radioUnits);
+		}
+		else {
+			unitRadio.check(R.id.radioMillilitre);
+		}
+		
 		final TextView dayValue = (TextView) findViewById(R.id.dayValue);
 		dayValue.setText("Current Value: " + daySyringeMax);
 		
@@ -39,10 +51,10 @@ public class Settings extends Activity {
 		nightValue.setText("Current Value: " + nightSyringeMax);
 		
 		final TextView dayWLI = (TextView) findViewById(R.id.dayWLI);
-		dayWLI.setText("Current Warning Level: " + dayWarnLevel);
+		dayWLI.setText("Current Value: " + dayWarnLevel);
 		
 		final TextView nightWLI = (TextView) findViewById(R.id.nightWLI);
-		nightWLI.setText("Current Warning Level: " + nightWarnLevel);
+		nightWLI.setText("Current Value: " + nightWarnLevel);
 		
 		Button saveButton = (Button) findViewById(R.id.saveButton);
 		saveButton.setOnClickListener(new OnClickListener() {
@@ -72,11 +84,17 @@ public class Settings extends Activity {
 						printError(2);
 					}
 					}catch (Exception e){}
+				if (unitRadio.getCheckedRadioButtonId() == R.id.radioUnits) {
+					penUnits = 0;
+				}
+				else {
+					penUnits = 1;
+				}
 				save();
 				dayValue.setText("Current Value: " + daySyringeMax);
 				nightValue.setText("Current Value: " + nightSyringeMax);
-				dayWLI.setText("Current Warning Level: " + dayWarnLevel);
-				nightWLI.setText("Current Warning Level: " + nightWarnLevel);
+				dayWLI.setText("Current Value: " + dayWarnLevel);
+				nightWLI.setText("Current Value: " + nightWarnLevel);
 				finish();
 				}
 		});
@@ -135,6 +153,7 @@ public class Settings extends Activity {
 		editor.putInt("nightSyringeMax", nightSyringeMax);
 		editor.putInt("dayWarningLevel", dayWarnLevel);
 		editor.putInt("nightWarningLevel", nightWarnLevel);
+		editor.putInt("units", penUnits);
 		editor.commit();	
 	}
 	
@@ -144,6 +163,7 @@ public class Settings extends Activity {
 		nightSyringeMax = levels.getInt("nightSyringeMax", 30);
 		dayWarnLevel = levels.getInt("dayWarningLevel", 0);
 		nightWarnLevel = levels.getInt("nightWarningLevel", 0);
+		penUnits = levels.getInt("units", 0);
 	}	
 		
 }
